@@ -1,4 +1,4 @@
-## Jadx scripting support with Kotlin script
+## Jadx scripting support with Kotlin
 
 This repo holds only release binaries until stable jadx-gui API  releases
 
@@ -12,8 +12,7 @@ How to install plugin:
   jadx plugins --install "github:jadx-decompiler:jadx-script-kotlin"
   ```
 - jadx-gui:
-  1. in `File` menu select `Preferences`
-  1. go to `Plugins` section
-  1. click `Install plugin` button
-  1. enter follow locationId: `github:jadx-decompiler:jadx-script-kotlin`
-  1. click `Install`
+  - in `File` menu select `Preferences`
+  - go to `Plugins` section
+  - select `Jadx Script (Kotlin)` from `Available` list
+  - click `Install` button
