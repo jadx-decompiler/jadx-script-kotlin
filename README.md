@@ -4,7 +4,7 @@ Jadx scripting guide can be found at [wiki page](https://github.com/skylot/jadx/
 
 ### Examples
 
-Check script examples in [`examples/`](https://github.com/skylot/jadx/tree/master/jadx-plugins/jadx-script-kotlin/examples/)(start with [`hello`](https://github.com/skylot/jadx/blob/master/jadx-plugins/jadx-script-kotlin/examples/hello.jadx.kts))
+Check script examples in [`examples/`](https://github.com/jadx-decompiler/jadx-script-kotlin/tree/main/examples)(start with [`hello`](https://github.com/jadx-decompiler/jadx-script-kotlin/tree/main/examples/hello.jadx.kts))
 
 
 ### How to install plugin
