@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+# additional permissions for provided GitHub token to create new release
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - name: Set version
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const pluginVersion = context.ref.split('/').pop().substring(1)
+            core.exportVariable('JADX_SCRIPT_KOTLIN_PLUGIN_VERSION', pluginVersion);
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Build
+        run: ./gradlew clean dist
+
+      - name: Create draft release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ env.JADX_SCRIPT_KOTLIN_PLUGIN_VERSION }}
+          draft: true
+          fail_on_unmatched_files: true
+          files: build/dist/jadx-script-kotlin-*.zip
