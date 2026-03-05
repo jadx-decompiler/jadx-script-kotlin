@@ -5,8 +5,8 @@ import jadx.api.plugins.JadxPluginContext
 import jadx.api.plugins.JadxPluginInfo
 import jadx.api.plugins.JadxPluginInfoBuilder
 import jadx.plugins.script.kotlin.eval.ScriptEval
-import jadx.plugins.script.kotlin.gui.registerJadxScriptInputCategory
-import jadx.plugins.script.kotlin.gui.setupJadxScriptOptionsUI
+import jadx.plugins.script.kotlin.gui.registerInputCategory
+import jadx.plugins.script.kotlin.gui.setupOptionsUI
 import jadx.plugins.script.kotlin.passes.JadxScriptAfterLoadPass
 import jadx.plugins.script.kotlin.runtime.JadxScriptPluginData
 import jadx.plugins.script.kotlin.runtime.data.JadxScriptAllOptions
@@ -26,13 +26,12 @@ class JadxScriptKotlinPlugin : JadxPlugin {
 	override fun init(context: JadxPluginContext) {
 		val scriptOptions = JadxScriptAllOptions()
 		context.registerOptions(scriptOptions)
-		pluginData = ScriptEval().process(context, scriptOptions)
-		pluginData?.let {
-			context.addPass(JadxScriptAfterLoadPass(it.scriptsData))
-			context.guiContext?.let { guiContext ->
-				setupJadxScriptOptionsUI(guiContext, scriptOptions)
-				registerJadxScriptInputCategory(it, guiContext)
-			}
+		val data = ScriptEval().process(context, scriptOptions).also { pluginData = it }
+		val scripts = data.scriptsData.takeIf { it.isNotEmpty() }
+		scripts?.let { context.addPass(JadxScriptAfterLoadPass(it)) }
+		context.guiContext?.let { guiContext ->
+			scripts?.let { setupOptionsUI(guiContext, scriptOptions) }
+			registerInputCategory(data, guiContext) // add category even if no scripts added
 		}
 	}
 

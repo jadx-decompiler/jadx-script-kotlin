@@ -5,7 +5,7 @@ import jadx.api.plugins.gui.JadxGuiContext
 import jadx.plugins.script.kotlin.runtime.data.JadxScriptAllOptions
 import javax.swing.JPanel
 
-fun setupJadxScriptOptionsUI(guiContext: JadxGuiContext, scriptOptions: JadxScriptAllOptions) {
+internal fun setupOptionsUI(guiContext: JadxGuiContext, scriptOptions: JadxScriptAllOptions) {
 	guiContext.settings().setCustomSettingsGroup(ScriptOptionsRootGroup(guiContext, scriptOptions))
 }
 

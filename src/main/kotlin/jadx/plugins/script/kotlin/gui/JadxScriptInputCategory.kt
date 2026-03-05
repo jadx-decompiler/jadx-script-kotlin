@@ -8,7 +8,7 @@ import jadx.gui.treemodel.JNode
 import jadx.plugins.script.kotlin.runtime.JadxScriptPluginData
 import java.nio.file.Path
 
-fun registerJadxScriptInputCategory(pluginData: JadxScriptPluginData, guiContext: JadxGuiContext) {
+internal fun registerInputCategory(pluginData: JadxScriptPluginData, guiContext: JadxGuiContext) {
 	val internalContext = guiContext as GuiPluginContext
 	val inputCategory = InputScriptsBuilder(pluginData)
 	internalContext.registerTreeInputCategory(inputCategory)
@@ -20,11 +20,7 @@ class InputScriptsBuilder(private val pluginData: JadxScriptPluginData) : ITreeI
 
 	override fun filesFilter(file: Path): Boolean = pluginData.getByScriptFileName(file.fileName.toString()) != null
 
-	override fun buildInputNode(files: List<Path>): JNode {
-		val scriptsNode = JInputScripts(pluginData)
-		scriptsRootNode = scriptsNode
-		return scriptsNode
-	}
+	override fun buildInputNode(files: List<Path>): JNode = JInputScripts(pluginData).also { scriptsRootNode = it }
 }
 
 class InputScriptTabStatePersist(private val scriptsBuilder: InputScriptsBuilder) : ITabStatePersist {

@@ -16,18 +16,17 @@ import kotlin.time.DurationUnit
 import kotlin.time.toDuration
 
 class ScriptEval {
-	fun process(context: JadxPluginContext, scriptOptions: JadxScriptAllOptions): JadxScriptPluginData? {
+	fun process(context: JadxPluginContext, scriptOptions: JadxScriptAllOptions): JadxScriptPluginData {
 		val jadx = context.decompiler
-		val scripts = jadx.args.inputFiles.filter { f -> f.name.endsWith(".jadx.kts") }
-		if (scripts.isEmpty()) {
-			return null
-		}
-		val pluginClassLoader = JadxScriptKotlinPlugin::class.java.classLoader
+		val scripts = jadx.args.inputFiles.filter { it.name.endsWith(".jadx.kts") }
 		val scriptsData = mutableListOf<JadxScriptData>()
-		for (scriptFile in scripts) {
-			val scriptData = JadxScriptData(jadx, context, scriptOptions, scriptFile, baseClassLoader = pluginClassLoader)
-			scriptsData += scriptData
-			eval(scriptData)
+		if (scripts.isNotEmpty()) {
+			val pluginClassLoader = JadxScriptKotlinPlugin::class.java.classLoader
+			for (scriptFile in scripts) {
+				val scriptData = JadxScriptData(jadx, context, scriptOptions, scriptFile, baseClassLoader = pluginClassLoader)
+				scriptsData += scriptData
+				eval(scriptData)
+			}
 		}
 		return JadxScriptPluginData(scriptsData)
 	}
