@@ -11,24 +11,17 @@ import javax.swing.Icon
 import javax.swing.ImageIcon
 import javax.swing.JPopupMenu
 
-class JInputScripts(
-	pluginData: JadxScriptPluginData,
-) : JNode() {
-	companion object {
-		private val INPUT_SCRIPTS_ICON: ImageIcon = UiUtils.openSvgIcon("nodes/scriptsModel")
-	}
+private val INPUT_SCRIPTS_ICON: ImageIcon = UiUtils.openSvgIcon("nodes/scriptsModel")
+
+class JInputScripts(pluginData: JadxScriptPluginData) : JNode() {
 
 	init {
-		for (scriptData in pluginData.scriptsData) {
-			add(JInputScript(scriptData))
-		}
+		pluginData.scriptsData.forEach { add(JInputScript(it)) }
 	}
 
-	override fun onTreePopupMenu(mainWindow: MainWindow): JPopupMenu {
-		val menu = JPopupMenu()
-		menu.add(SimpleMenuItem(NLS.str("popup.add_scripts")) { mainWindow.addFiles() })
-		menu.add(SimpleMenuItem(NLS.str("popup.new_script")) { mainWindow.addNewScript() })
-		return menu
+	override fun onTreePopupMenu(mainWindow: MainWindow) = JPopupMenu().apply {
+		add(SimpleMenuItem(NLS.str("popup.add_scripts")) { mainWindow.addFiles() })
+		add(SimpleMenuItem(NLS.str("popup.new_script")) { addNewInputScript(mainWindow) })
 	}
 
 	override fun getJParent(): JClass? = null

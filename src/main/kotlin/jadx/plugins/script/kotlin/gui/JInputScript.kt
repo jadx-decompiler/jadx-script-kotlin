@@ -55,7 +55,7 @@ class JInputScript(
 	override fun onTreePopupMenu(mainWindow: MainWindow): JPopupMenu {
 		val menu = JPopupMenu()
 		menu.add(SimpleMenuItem(NLS.str("popup.add_scripts")) { mainWindow.addFiles() })
-		menu.add(SimpleMenuItem(NLS.str("popup.new_script")) { mainWindow.addNewScript() })
+		menu.add(SimpleMenuItem(NLS.str("popup.new_script")) { addNewInputScript(mainWindow) })
 		menu.add(SimpleMenuItem(NLS.str("popup.remove")) { mainWindow.removeInput(scriptPath) })
 		menu.add(SimpleMenuItem(NLS.str("popup.rename")) { mainWindow.renameInput(scriptPath) })
 		return menu
