@@ -8,18 +8,18 @@ import java.util.Locale
 plugins {
 	id("java-library")
 
-	kotlin("jvm") version "2.3.10"
+	kotlin("jvm") version "2.3.20"
 
 	id("se.patrikerdes.use-latest-versions") version "0.2.19"
 	id("com.github.ben-manes.versions") version "0.53.0"
-	id("com.diffplug.spotless") version "8.2.1"
+	id("com.diffplug.spotless") version "8.4.0"
 }
 
 group = "io.github.jadx-decompiler"
 version = System.getenv("JADX_SCRIPT_KOTLIN_PLUGIN_VERSION") ?: "dev"
 
 dependencies {
-	val jadxVersion = "1.5.4"
+	val jadxVersion = "1.5.5"
 	val isJadxSnapshot = jadxVersion.endsWith("-SNAPSHOT")
 	compileOnly("io.github.skylot:jadx-core:$jadxVersion") { isChanging = isJadxSnapshot }
 	compileOnly("io.github.skylot:jadx-gui:$jadxVersion") { isChanging = isJadxSnapshot }
@@ -58,6 +58,7 @@ dependencies {
 		isChanging = isJadxSnapshot
 	}
 
+	testImplementation("io.github.oshai:kotlin-logging-jvm:7.0.13")
 	testImplementation("ch.qos.logback:logback-classic:1.5.22")
 	testImplementation("org.assertj:assertj-core:3.27.6")
 	testImplementation("io.mockk:mockk:1.14.9")
