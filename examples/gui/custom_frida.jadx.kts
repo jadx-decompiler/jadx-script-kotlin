@@ -55,7 +55,7 @@ fun generateMethodSnippet(mthNode: MethodNode): String {
 		StringEscapeUtils.escapeEcmaScript(methodInfo.name)
 	}
 	val overload = if (isOverloaded(mthNode)) {
-		".overload(${methodInfo.argumentsTypes.joinToString(transform = this::parseArgType)})"
+		".overload(${methodInfo.argumentsTypes.joinToString(transform = { parseArgType(it) })})"
 	} else {
 		""
 	}

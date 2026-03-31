@@ -11,11 +11,13 @@ import jadx.plugins.script.kotlin.passes.JadxScriptAfterLoadPass
 import jadx.plugins.script.kotlin.runtime.JadxScriptPluginData
 import jadx.plugins.script.kotlin.runtime.data.JadxScriptAllOptions
 
+const val JADX_SCRIPT_KOTLIN_PLUGIN_ID = "jadx-script-kotlin"
+
 class JadxScriptKotlinPlugin : JadxPlugin {
 	private var pluginData: JadxScriptPluginData? = null
 
 	override fun getPluginInfo(): JadxPluginInfo = JadxPluginInfoBuilder
-		.pluginId("jadx-script-kotlin")
+		.pluginId(JADX_SCRIPT_KOTLIN_PLUGIN_ID)
 		.name("Jadx Script (Kotlin)")
 		.description("Scripting support for jadx using Kotlin")
 		.homepage("https://github.com/jadx-decompiler/jadx-script-kotlin")

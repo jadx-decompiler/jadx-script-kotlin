@@ -5,6 +5,7 @@ import jadx.api.plugins.options.OptionDescription
 import jadx.api.plugins.options.OptionFlag
 import jadx.api.plugins.options.OptionType
 import jadx.api.plugins.options.impl.JadxOptionDescription
+import jadx.plugins.script.kotlin.JADX_SCRIPT_KOTLIN_PLUGIN_ID
 import jadx.plugins.script.kotlin.runtime.JadxScriptInstance
 
 class JadxScriptAllOptions : JadxPluginOptions {
@@ -25,7 +26,7 @@ class ScriptOptionDesc(
 	defaultValue: String?,
 	values: List<String>,
 	type: OptionType,
-) : JadxOptionDescription("jadx-script.$script.$optName", desc, defaultValue, values, type)
+) : JadxOptionDescription("$JADX_SCRIPT_KOTLIN_PLUGIN_ID.$script.$optName", desc, defaultValue, values, type)
 
 class ScriptOption<T>(
 	val name: String,
