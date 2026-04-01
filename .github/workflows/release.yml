@@ -29,7 +29,7 @@ jobs:
             core.exportVariable('JADX_SCRIPT_KOTLIN_PLUGIN_VERSION', pluginVersion);
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Build
         run: ./gradlew clean dist
