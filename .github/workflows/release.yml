@@ -35,7 +35,7 @@ jobs:
         run: ./gradlew clean dist
 
       - name: Create draft release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: ${{ env.JADX_SCRIPT_KOTLIN_PLUGIN_VERSION }}
           draft: true
